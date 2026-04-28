@@ -53,7 +53,6 @@ const onDragEnd = () => {
 <template>
   <div class="nav-section">
     <div class="nav-header">
-      <span class="title">我的收藏</span>
       <button @click="isEditing = !isEditing" class="edit-btn" :class="{ active: isEditing }">
         {{ isEditing ? '完成' : '排序/编辑' }}
       </button>
@@ -117,11 +116,65 @@ const onDragEnd = () => {
 </template>
 
 <style scoped>
-.nav-header {
-  height: 60px;
-  display: flex;
-  gap: 20px;
+.nav-section {
+  /* 核心配置 */
+  width: 90%;           /* 占据屏幕宽度的 90% */
+  max-width: 1400px;    /* 但最大不超过 1400px，防止超大屏下图标太稀疏 */
+  margin: 0 auto;       /* 水平居中，两侧自动留空 */
 
+  /* 辅助配置 */
+  padding: 40px 0;      /* 上下留 40px 间距，左右边距由 margin 处理 */
+}
+.nav-header {
+  height: 10px;
+  display: flex;
+  justify-content: flex-end; /* 标题在左，按钮在右 */
+  align-items: center;            /* 垂直居中 */
+  margin-bottom: 30px;            /* 与下方图标区域拉开距离 */
+}
+
+/* 1. 核心：让 <a> 标签本身成为一个居中的 Flex 容器 */
+.site-link {
+  display: flex;
+  flex-direction: column; /* 垂直排列图标和文字 */
+  align-items: center;    /* 核心：水平方向居中对齐所有子元素 */
+  width: 100%;           /* 占满 site-card 的宽度 */
+
+  /* 保持之前的禁用变色样式 */
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 如果你还想让 visited 状态保持不乱 */
+.site-link:visited {
+  color: inherit;
+}
+
+/* 2. 优化：让图标和文字之间有一个固定的微小空隙 */
+.icon-wrapper {
+  /* 保持你之前的样式 */
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* 将 margin-bottom 改为 site-link 内部处理 */
+  margin-bottom: 8px; /* 标题和文字的间距，这个值可以根据需要微调 */
+}
+
+/* 3. 如果为了保险起见，给 site-name 也加一个文字居中 */
+.site-name {
+  margin-top: 0; /* 既然 icon 有 margin-bottom 了，这里可以为0 */
+  font-size: 14px;
+  color: #333;
+  text-align: center; /* 确保文字多行时也是居中的 */
+  display: block;     /* 占满宽度以便 text-align 生效 */
 }
 
 .edit-btn {
