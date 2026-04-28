@@ -123,10 +123,11 @@ watch(keyword, (newVal) => {
   position: relative;
   display: flex;
   background-color: #f1f3f8;
-  border-radius: 24px; /* 更圆润 */
-  padding: 4px;
-  width: 260px; /* 稍微窄一点更精致 */
+  border-radius: 24px;
+  padding: 4px; /* 轨道内边距 */
+  width: 270px; /* 固定一个易于被 3 整除的宽度，如 270px */
   box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
+  box-sizing: border-box; /* 确保 padding 不挤出容器 */
 }
 
 .engine-tabs span {
@@ -150,14 +151,18 @@ watch(keyword, (newVal) => {
 
 .active-indicator {
   position: absolute;
-  top: 4px;
-  left: 4px;
-  width: calc(33.33% - 5.3px); /* 适配 padding 的宽度计算 */
+  top: 4px; /* 与父级 padding 一致 */
+  left: 4px; /* 与父级 padding 一致 */
+
+  /* 修正点：宽度直接设为 (100% - 左右padding之和) / 3 */
+  width: calc((100% - 8px) / 3);
+
   height: 34px;
   background: #4e6ef2;
   border-radius: 20px;
   z-index: 1;
-  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  /* 优化贝塞尔曲线，让移动更像物理滑动 */
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   box-shadow: 0 4px 10px rgba(78, 110, 242, 0.3);
 }
 
