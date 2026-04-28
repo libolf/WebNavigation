@@ -74,8 +74,9 @@ const onDragEnd = () => {
              class="site-link">
             <div class="icon-wrapper">
               <img
-                :src="`https://www.google.com/s2/favicons?domain=${getDomain(element.url)}&sz=64`"
-                @error="(e) => e.target.src='https://via.placeholder.com/64?text=?'" />
+                :src="store.getIconFromCache(element.url) || `https://unavatar.io/duckduckgo/${getDomain(element.url)}`"
+                @error="(e) => e.target.src='https://via.placeholder.com/64?text=?'"
+              />
             </div>
             <span class="site-name">{{ element.name }}</span>
           </a>
