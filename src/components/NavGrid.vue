@@ -124,7 +124,7 @@ const onDragEnd = () => {
   margin: 0 auto;       /* 水平居中，两侧自动留空 */
 
   /* 辅助配置 */
-  padding: 20px 0;      /* 上下留 40px 间距，左右边距由 margin 处理 */
+  padding: 10px 0;      /* 上下留 40px 间距，左右边距由 margin 处理 */
 }
 .nav-header {
   height: 10px;
@@ -190,7 +190,7 @@ const onDragEnd = () => {
 /* 保持之前的 grid 样式 */
 .nav-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
   gap: 25px 15px;
   min-height: 100px;
 }
@@ -203,10 +203,10 @@ const onDragEnd = () => {
 }
 
 .icon-wrapper {
-  width: 60px;
-  height: 60px;
+  width: 52px;
+  height: 52px;
   background: #fff;
-  border-radius: 16px;
+  border-radius: 12px;
   display: flex;
   justify-content: center;
   align-items: center;

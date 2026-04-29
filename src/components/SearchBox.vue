@@ -170,7 +170,7 @@ watch(keyword, (newVal) => {
 <style scoped>
 .search-container {
   max-width: 800px;
-  margin: 20px auto;
+  margin: 10px auto;
   text-align: center;
   position: relative;
 }
@@ -384,8 +384,6 @@ input {
 .hot-panel-full {
   position: absolute;
   top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
   width: 600px;
   background: white;
   border-radius: 12px;
