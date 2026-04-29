@@ -180,6 +180,15 @@ const onDragEnd = () => {
   color: #333;
   text-align: center; /* 确保文字多行时也是居中的 */
   display: block;     /* 占满宽度以便 text-align 生效 */
+
+  word-break: break-word;      /* 强制在任意字符间断开（包括英文单词内部） */
+  overflow-wrap: break-word;  /* 兼容性更好的换行处理 */
+  line-height: 1.2;           /* 换行后行间距更紧凑，好看一点 */
+  max-height: 2.4em;          /* 可选：限制最多显示两行 */
+  overflow: hidden;           /* 可选：超出两行的部分隐藏 */
+  display: -webkit-box;       /* 可选：结合下面两行实现多行省略 */
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .edit-btn {

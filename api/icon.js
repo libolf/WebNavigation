@@ -13,7 +13,7 @@ export default async function handler(req) {
 
   // 尝试多个源以提高成功率
   const sources = [
-    `https://www.google.com/s2/favicons?sz=128&domain=${domain}`,
+    `https://www.google.com/s2/favicons?sz=64&domain=${domain}`,
     `https://icons.duckduckgo.com/ip3/${domain}.ico`
   ];
 
