@@ -34,38 +34,38 @@ const initDate = () => {
 // 3. 获取 wttr.in 天气数据
 const fetchWeather = async () => {
   try {
-    const res = await fetch('https://wttr.in/?format=j1&lang=zh')
+    const res = await fetch('/api/weather')
     if (!res.ok) throw new Error('网络响应异常')
     const data = await res.json()
 
     // 2. 获取当前实况
-    const current = data.current_condition?.[0] || {}
-    const todayData = data.weather?.[0] || {}
-    const tomorrowData = data.weather?.[1] || {}
+//    const current = data.forecasts?.[0] || {}
+//    const todayData = data.weather?.[0] || {}
+//    const tomorrowData = data.weather?.[1] || {}
 
     // 3. 辅助函数：安全获取温度区间
     const getTempRange = (dayObj) => {
-      if (dayObj && dayObj.mintempC && dayObj.maxtempC) {
-        return `${dayObj.mintempC}° / ${dayObj.maxtempC}°C`
+      if (dayObj && dayObj.daytemp && dayObj.nighttemp) {
+        return `${dayObj.daytemp}° / ${dayObj.nighttemp}°C`
       }
       return '-- / --°C'
     }
 
     // 4. 安全获取天气描述
-    const getDesc = (conditionObj) => {
-      if (!conditionObj) return '未知'
-      return conditionObj.lang_zh?.[0]?.value || conditionObj.weatherDesc?.[0]?.value || '未知'
-    }
+//    const getDesc = (conditionObj) => {
+//      if (!conditionObj) return '未知'
+//      return conditionObj.lang_zh?.[0]?.value || conditionObj.weatherDesc?.[0]?.value || '未知'
+//    }
 
     weatherData.value = {
       today: {
-        desc: getDesc(current),
-        tempRange: getTempRange(todayData),
+        desc: data.liveWeather.weather,
+        tempRange: data.liveWeather.temperature + "°C",
       },
       tomorrow: {
         // 明天中午的时段通常在 hourly 数组的第 4 或第 5 个元素
-        desc: getDesc(tomorrowData.hourly?.[4]),
-        tempRange: getTempRange(tomorrowData)
+        desc: data.nextWeather.dayweather,
+        tempRange: getTempRange(data.nextWeather)
       }
     }
   } catch (e) {
